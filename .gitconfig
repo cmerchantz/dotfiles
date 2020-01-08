@@ -1,0 +1,16 @@
+[user]
+	name = cmerchantz
+	email = 42525677+cmerchantz@users.noreply.github.com
+[github]
+    user = cmerchantz
+[core]
+	editor = vim
+    excludesfile = ~/.gitignore
+[push]
+	default = simple
+[color]
+	ui = auto
+[alias]
+    br = branch
+    co = checkout
+    graph = log --all --decorate --oneline --graph

@@ -8,17 +8,22 @@ alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 ## New machine installation
 
-~~~
-git clone --separate-git-dir=$HOME/.dotfiles https://github.com/cmerchantz/.dotfiles.git ~
-~~~
+* Get the repo set up
+ 
+	~~~
+	git clone --separate-git-dir=$HOME/.dotfiles https://github.com/cmerchantz/.dotfiles.git ~
+	~~~
+	
+	Or, if there are already some configuration files in place,
+	
+	~~~
+	git clone --separate-git-dir=$HOME/.dotfiles https://github.com/cmerchantz/.dotfiles.git tmpdotfiles
+	rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
+	rm -r tmpdotfiles
+	~~~
 
-Or, if there are already some configuration files in place,
-
-~~~
-git clone --separate-git-dir=$HOME/.dotfiles https://github.com/cmerchantz/.dotfiles.git tmpdotfiles
-rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
-rm -r tmpdotfiles
-~~~
+* Link `~/.itermprefrences` to iTerm in Preferences > General > Preferences.
+* Ensure `~/.bash_aliases` is sourced in `.bashrc` or `.bash_profile` or what have you. This is important, since it includes the `dotfiles` alias necessary to maintain the repo.
 
 ## Further Reading
 

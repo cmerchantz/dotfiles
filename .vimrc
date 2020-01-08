@@ -1,6 +1,7 @@
 set nocompatible
 
 syntax on
+filetype on
 colorscheme dim
 
 set autoread
@@ -9,11 +10,14 @@ set backspace=indent,eol,start
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set nojoinspaces
 set ruler
-set hlsearch
-set noincsearch
+set hlsearch incsearch ignorecase smartcase
 set splitright
 set wildmenu
-set ignorecase smartcase
+set updatetime=100
+set nolist
+
+set t_te=""
+au VimLeave * :!clear
 
 if $ITERM_PROFILE == 'writing'
     set nonumber
@@ -21,44 +25,26 @@ else
     set number
 endif
 
-"See also easytags configuration
-set tags=./.tags;,~/.vimtags
+"Access a file that sources ~/.bash_aliases
+let $BASH_ENV="~/.vim/vim_bashrc"
 
-let mapleader = ' '
+set tags=./.tags;~
 
 "Highlighting
 "------------
 hi ColorColumn ctermbg=grey
-hi Search ctermbg=2 ctermfg=black
-hi SearchCurrent ctermbg=3 ctermfg=black
+hi Search ctermbg=4 ctermfg=black
+hi SearchCurrent ctermbg=6 ctermfg=black
 hi Cursor ctermfg=white
 hi CursorLine ctermbg=darkgrey
 hi CursorColumn ctermbg=darkgrey
 hi Function2 cterm=bold
-hi Folded ctermbg=green ctermfg=white
+hi Folded ctermbg=magenta ctermfg=black
 hi link notesDoubleQuoted Comment
-hi clear SpellBad
-hi SpellBad gui=underline cterm=underline ctermfg=red
+hi SpellBad gui=underline cterm=underline ctermfg=red ctermbg=darkgrey
 hi VertSplit ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi StatusLine ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
-
-"Leader Mappings
-"--------
-map <leader>b :Black<cr>
-map <leader>d :put =strftime('%Y-%m-%d')<cr>
-nnoremap <silent> <leader>f :FZF<cr>
-nnoremap <silent> <Leader>rg :Rg <C-R><C-W><CR>
-map <leader>m :MinimapToggle<CR>
-map <leader>s :set spell!<cr>
-map <leader>u :buffers<cr>
-nnoremap <leader>c :ColorToggle<cr>
-
-"Other mappings
-"--------------
-
-"'Split' line, simlar functionality to J
-nnoremap S :keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>
 
 
 "Python highlighting
@@ -81,32 +67,35 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'ambv/black'
-Plug 'mpyatishev/vim-sqlformat'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
-Plug 'xolox/vim-easytags'
+"Plug 'xolox/vim-easytags'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf'
 Plug 'thiagoalessio/rainbow_levels.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'lilydjwg/colorizer'
 Plug 'jremmen/vim-ripgrep'
 "Plug 'inkarkat/vim-mark'
-Plug 'vim-scripts/Align' "required for SQLUtilities
-Plug 'vim-scripts/SQLUtilities'
-"Plug 'https://github.com/vim-scripts/highlight.vim'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
 Plug 'severin-lemaignan/vim-minimap'
+Plug 'davidhalter/jedi-vim', { 'for':  'python' }
 Plug 'majutsushi/tagbar'
-Plug 'airblade/vim-gitgutter'
+Plug 'ervandew/supertab'
 Plug 'easymotion/vim-easymotion'
+Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'alvan/vim-closetag'
+"Plug 'thaerkh/vim-indentguides'
+Plug 'wellle/context.vim'
+Plug 'gerw/vim-HiLinkTrace'
+Plug 'cespare/vim-toml'
+Plug 'christoomey/vim-run-interactive'
 call plug#end()
 
 "Airline
@@ -119,15 +108,43 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 let g:airline_skip_empty_sections = 1
 let g:airline_section_y = ''
+let g:airline_skip_empty_sections = 1
 
+"gitgutter
+hi! link GitGutterAdd DiffAdd
+hi! link GitGutterDelete DiffDelete
+hi! link GitGutterChange DiffChange
+hi! link GitGutterChangeDelete DiffChange
+let g:gitgutter_async = 0
+let g:gitgutter_sign_added = '+'
+let g:gitgutter_sign_modified = '~'
+let g:gitgutter_sign_removed = '-'
+let g:gitgutter_sign_removed_first_line = '-'
+let g:gitgutter_sign_modified_removed = '~-'
+"let g:gitgutter_sign_added = '➕'
+"let g:gitgutter_sign_modified = '〰️'
+"let g:gitgutter_sign_removed = '➖'
+"let g:gitgutter_sign_removed_first_line = '➖'
+"let g:gitgutter_sign_modified_removed = '〰️'
+
+"fugitive
+autocmd FileType gitcommit set foldmethod=syntax
+
+"vim-indent-guides
+"let g:indent_guides_guide_size=1
+
+"vim-minimap
+let g:minimap_highlight = 'SearchCurrent'
 
 "NERDTree
-nnoremap <leader>n :NERDTreeToggle<CR>
+"leader mapping set below
 
+"tagbar
+let g:tagbar_sort = 0
 
-"SQLUtilities
-"let g:sqlutil_keyword_case = '\U'
-"vmap <silent>sf <Plug>SQLUFormatter<CR>
+"supertab
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
 
 "black
 let g:black_linelength = 100
@@ -136,22 +153,36 @@ let g:black_linelength = 100
 nnoremap <silent> gw :ArgWrap<CR>
 let g:argwrap_tail_comma = 1
 
+"jedi-vim
+"let g:jedi#auto_initialization = 0
+let g:jedi#use_splits_not_buffers = 'left'
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = '2'
+let g:jedi#goto_stubs_command = ""
+
 "folding
 let g:SimpylFold_docstring_preview = 1
 set nofoldenable
 
+"context.vim
+let g:context_enabled = 0
+"leader mapping set below
+
 "easytags
-let g:easytags_cmd = '/usr/local/bin/ctags'
-let g:easytags_opts = ['-n']
-let g:easytags_dynamic_files = 1
-let g:easytags_file = '~/.vimtags'
-let g:easytags_syntax_keyword = 'always'
-let g:easytags_always_enabled = 1
-let g:easytags_autorecurse = 0
-let g:easytags_suppress_report = 1
+"let g:easytags_cmd = '/usr/local/bin/ctags'
+"let g:easytags_opts = ['-n']
+"let g:easytags_dynamic_files = 1
+"let g:easytags_file = '~/.tags'
+"let g:easytags_syntax_keyword = 'always'
+"let g:easytags_always_enabled = 1
+"let g:easytags_autorecurse = 0
+"let g:easytags_suppress_report = 1
+"let b:easytags_auto_highlight = 0
+
+"gutentags
+let g:gutentags_ctags_tagfile = '.tags'
 
 "Rainbow Levels
-map <leader>l :RainbowLevelsToggle<cr>
 hi! RainbowLevel0 ctermfg=068 guifg=#6699cc
 hi! RainbowLevel1 ctermfg=203 guifg=#ec5f67
 hi! RainbowLevel2 ctermfg=221 guifg=#fac863
@@ -171,14 +202,24 @@ hi! RainbowLevel7 ctermfg=137 guifg=#ab7967
 "hi! RainbowLevel6 ctermbg=234 guibg=#1c1c1c
 "hi! RainbowLevel7 ctermbg=233 guibg=#121212
 
-"vim-minimap
-let g:minimap_highlight='SignColumn'
-
-"indent-guides
-let g:indent_guides_guide_size = 1
+"ALE
+let g:ale_enabled = 0
+let g:ale_python_pylint_options = '--max-line-length=100'
 
 "User-defined commands
 "---------------------
+
+" Make a line have 'title case'
+command TitleCase :s/\v<(.)(\w*)/\u\1\L\2/g
+
+"fugitive-esque git diff --staged
+command! Greview :Gtabedit @:% | Gdiff :
+
+"Put the date
+command! Date put =strftime('%Y-%m-%d')<CR>
+
+"Split a line with S (analagous to J)
+nnoremap S :keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>
 
 "Insert the current date
 command! Date put =strftime('%Y-%m-%d')
@@ -212,10 +253,6 @@ function! CopyMatches(reg)
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
-"ALE
-nnoremap <silent> <leader>a :ALEToggle<CR>
-let g:ale_enabled = 0
-
 "jump to next/previous fold
 "nnoremap <silent> <leader>zj :call NextClosedFold('j')<cr>
 "nnoremap <silent> <leader>zk :call NextClosedFold('k')<cr>
@@ -233,3 +270,22 @@ let g:ale_enabled = 0
 "        call winrestview(view)
 "    endif
 "endfunction
+
+"Mappings
+"--------
+:imap <Tab> <C-t>
+:imap <S-Tab> <C-d>
+
+"Leader Mappings
+let mapleader = ' '
+
+nnoremap <silent> <leader>a :ALEToggle<CR>
+nnoremap <leader>b :Black<CR>
+nnoremap <leader>c :ContextToggle<CR>
+nnoremap <silent> <leader>f :FZF<CR>
+noremap <leader>rl :RainbowLevelsToggle<cr>
+nnoremap <leader>n :NERDTreeToggleVCS<CR>
+nnoremap <silent> <leader>rg :Rg <C-R><C-W><CR>
+nnoremap <leader>t :TagbarToggle<CR>
+let g:jedi#rename_command = "<leader>re"
+let g:jedi#usages_command = "<leader>u"

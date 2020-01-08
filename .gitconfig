@@ -10,7 +10,30 @@
 	default = simple
 [color]
 	ui = auto
+[merge]
+	tool = p4mergetool
+[mergetool "p4mergetool"]
+    cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+	trustExitCode = false
+[mergetool]
+	keepBackup = false
+[diff]
+	tool = p4mergetool
+[difftool "p4mergetool"]
+    cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
 [alias]
-    br = branch
-    co = checkout
-    graph = log --all --decorate --oneline --graph
+	graph = log --all --decorate --oneline --graph
+    branch-name = "!git rev-parse --abbrev-ref HEAD"
+    publish = "!git push -u origin $(git branch-name)"
+    unpublish = "!git push origin :$(git branch-name)"
+    br = "branch"
+    co = "checkout"
+    thistoo = "commit --amend --no-edit"
+    show-across-branches = "! _() {\
+        if [ \"$#\" -ne 1 ]; then echo \"Usage: git test-func {FILE}\"; exit 1; fi; \
+        for branch in $(git for-each-ref --format='%(refname:short)' refs/heads/*); do\
+            echo \"\\033[38;2;255;0;0m$branch\\033[0m\"; \
+            git show \"$branch\":\"$1\"; \
+            echo; \
+        done; \
+    }; _"

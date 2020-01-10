@@ -45,7 +45,7 @@ hi SpellBad gui=underline cterm=underline ctermfg=red ctermbg=darkgrey
 hi VertSplit ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi StatusLine ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
-
+hi SpellCap gui=underline cterm=underline ctermbg=NONE ctermfg=yellow
 
 "Python highlighting
 "-------------------
@@ -204,7 +204,14 @@ hi! RainbowLevel7 ctermfg=137 guifg=#ab7967
 
 "ALE
 let g:ale_enabled = 0
-let g:ale_python_pylint_options = '--max-line-length=100'
+let g:ale_linters = {'python': ['flake8']}
+let g:ale_python_flake8_options = '--max-line-length=100'
+nmap <silent> [a <Plug>(ale_previous_wrap)
+nmap <silent> ]a <Plug>(ale_next_wrap)
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 "User-defined commands
 "---------------------

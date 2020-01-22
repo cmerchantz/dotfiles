@@ -73,3 +73,14 @@ function ranger-cd {
     rm -f -- "$tempfile"
 }
 
+# python3 is default python
+alias python='python3'
+
+# pip3 is default pip
+alias pip='pip3'
+
+# ssh into vps
+alias vps='ssh benjamin@vps'
+
+# open
+alias open='xdg-open'

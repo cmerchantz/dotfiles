@@ -27,4 +27,4 @@ alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 ## Further Reading
 
-This stragegy for managing dotfiles is explained in further depth [here](https://www.anand-iyer.com/blog/2018/a-simpler-way-to-manage-your-dotfiles.html) or [here](https://www.atlassian.com/git/tutorials/dotfiles).
+This strategy for managing dotfiles is explained in further depth [here](https://www.anand-iyer.com/blog/2018/a-simpler-way-to-manage-your-dotfiles.html) or [here](https://www.atlassian.com/git/tutorials/dotfiles).

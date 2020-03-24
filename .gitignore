@@ -31,3 +31,13 @@ Icon?
 Thumbs.db
 
 *.lock
+
+# Hypothesis examples
+.hypothesis/*
+
+# ctags
+.tags
+
+# coverage.py
+.coverage
+*,cover

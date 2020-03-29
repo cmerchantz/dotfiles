@@ -8,7 +8,8 @@ alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias beep="echo -e '\a'"
 alias bim="vim"
 alias vimr="vim -R"
-alias resource="source ~/.bashrc"
+alias vimfzf='vim $(fzf)'
+alias resource="source ~/.bash_profile"
 alias ls="ls -1G"
 alias please='sudo $(history -p !!)'
 

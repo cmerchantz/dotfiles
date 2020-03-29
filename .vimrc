@@ -77,7 +77,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'thiagoalessio/rainbow_levels.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'lilydjwg/colorizer'
@@ -174,6 +174,7 @@ let g:context_enabled = 0
 
 "gutentags
 let g:gutentags_ctags_tagfile = '.tags'
+let g:gutentags_file_list_command = 'rg --files'
 
 "Rainbow Levels
 hi! RainbowLevel0 ctermfg=068 guifg=#6699cc

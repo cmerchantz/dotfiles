@@ -32,6 +32,9 @@ Thumbs.db
 
 *.lock
 
+# tox
+.tox/
+
 # Hypothesis examples
 .hypothesis/*
 

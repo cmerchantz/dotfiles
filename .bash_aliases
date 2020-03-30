@@ -47,10 +47,6 @@ function weather {
     curl "http://wttr.in/$1"
 }
 
-function title {
-    echo -ne "\033]0;"$*"\007"
-}
-
 function cls() {
     clear
     pwd

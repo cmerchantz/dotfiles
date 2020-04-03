@@ -11,6 +11,9 @@
 *.swo
 *~
 
+# vim
+*.session
+
 # Packages
 *.7z
 *.dmg

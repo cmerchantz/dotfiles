@@ -144,7 +144,7 @@ c() {
 alias beep="echo -e '\a'"
 alias bim="vim"
 alias vimr="vim -R"
-alias vimf='vim $(fzf)'
+alias vimf='vim $(fzfp)'
 alias resource="source ~/.bash_profile"
 alias ls="ls -1G"
 alias please='sudo $(history -p !!)'

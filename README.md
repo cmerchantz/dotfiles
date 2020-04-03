@@ -11,13 +11,13 @@ alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 * Get the repo set up
  
 	~~~
-	git clone --separate-git-dir=$HOME/.dotfiles https://github.com/cmerchantz/.dotfiles.git ~
+	git clone --separate-git-dir=$HOME/.dotfiles https://github.com/cmerchantz/dotfiles.git ~
 	~~~
 	
 	Or, if there are already some configuration files in place,
 	
 	~~~
-	git clone --separate-git-dir=$HOME/.dotfiles https://github.com/cmerchantz/.dotfiles.git tmpdotfiles
+	git clone --separate-git-dir=$HOME/.dotfiles https://github.com/cmerchantz/dotfiles.git tmpdotfiles
 	rsync --recursive --verbose --exclude '.git' tmpdotfiles/ $HOME/
 	rm -r tmpdotfiles
 	~~~

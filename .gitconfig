@@ -1,8 +1,5 @@
-[user]
-	name = cmerchantz
-	email = 42525677+cmerchantz@users.noreply.github.com
-[github]
-    user = cmerchantz
+[include]
+    path = ~/.gitconfig_local
 [core]
 	editor = vim
     excludesfile = ~/.gitignore

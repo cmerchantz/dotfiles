@@ -34,8 +34,8 @@ set tags=./.tags;~
 "Highlighting
 "------------
 hi ColorColumn ctermbg=grey
-hi Search ctermbg=4 ctermfg=black
-hi SearchCurrent ctermbg=6 ctermfg=black
+hi Search ctermbg=2 ctermfg=0
+hi SearchCurrent ctermbg=2 ctermfg=7
 hi Cursor ctermfg=white
 hi CursorLine ctermbg=darkgrey
 hi CursorColumn ctermbg=darkgrey

@@ -98,6 +98,7 @@ Plug 'cespare/vim-toml'
 Plug 'christoomey/vim-run-interactive'
 Plug 'djoshea/vim-autoread'
 Plug 'mgedmin/coverage-highlight.vim'
+Plug 'tpope/vim-sensible'
 call plug#end()
 
 "Airline

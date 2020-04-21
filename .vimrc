@@ -110,6 +110,7 @@ Plug 'christoomey/vim-run-interactive'
 Plug 'djoshea/vim-autoread'
 Plug 'mgedmin/coverage-highlight.vim'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-eunuch'
 call plug#end()
 
 "Airline

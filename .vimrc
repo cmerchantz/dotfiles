@@ -6,7 +6,7 @@ colorscheme dim
 
 set autoread
 set backspace=indent,eol,start
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+set smarttab
 set nojoinspaces
 set ruler
 set hlsearch incsearch ignorecase smartcase
@@ -30,6 +30,17 @@ let $BASH_ENV="~/.vim/vim_bashrc"
 
 "See also easytags configuration
 set tags=./.tags;~
+
+"Filetype-specific configuration
+"-------------------------------
+"Python file autocommands
+au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=100 expandtab autoindent fileformat=unix
+
+"Web file autocommands
+au BufNewFile,BufRead *.js, *.html, *.css set tabstop=2 softtabstop=2 shiftwidth=2
+
+"RestructuredText autocommands
+au BufNewFile,BufRead *.rst set tabstop=3 softtabstop=3 shiftwidth=3 expandtab autoindent
 
 "Highlighting
 "------------

@@ -58,6 +58,7 @@ hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi StatusLine ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi SpellCap gui=underline cterm=underline ctermbg=NONE ctermfg=yellow
 hi clear Conceal
+hi clear SignColumn
 
 "Python highlighting
 "-------------------
@@ -132,6 +133,9 @@ hi! link GitGutterAdd DiffAdd
 hi! link GitGutterDelete DiffDelete
 hi! link GitGutterChange DiffChange
 hi! link GitGutterChangeDelete DiffChange
+hi diffAdded ctermfg=2 guifg=#009900
+hi diffChanged ctermfg=3 guifg=#bbbb00
+hi diffRemoved ctermfg=1 guifg=#ff2222
 let g:gitgutter_async = 0
 let g:gitgutter_sign_added = '+'
 let g:gitgutter_sign_modified = '~'
@@ -386,3 +390,8 @@ nnoremap <silent> <leader>rg :Rg <C-R><C-W><CR>
 nnoremap <leader>t :TagbarToggle<CR>
 let g:jedi#rename_command = "<leader>re"
 let g:jedi#usages_command = "<leader>u"
+
+"Check the highlight group under the cursor
+map <leader><leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>

@@ -57,6 +57,7 @@ hi VertSplit ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi StatusLine ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi SpellCap gui=underline cterm=underline ctermbg=NONE ctermfg=yellow
+hi clear Conceal
 
 "Python highlighting
 "-------------------
@@ -111,6 +112,8 @@ Plug 'djoshea/vim-autoread'
 Plug 'mgedmin/coverage-highlight.vim'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-eunuch'
+Plug 'lervag/vimtex'
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 call plug#end()
 
 "Airline
@@ -279,6 +282,19 @@ let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+
+"vim-latex-live-preview
+"let g:livepreview_previewer = 'evince'
+"let g:livepreview_engine = '/Library/TeX/texbin/pdflatex'
+
+"vimtex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='skim'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+
+"tex-conceal.vim
+let g:tex_conceal='abdmg'
 
 "User-defined commands
 "---------------------

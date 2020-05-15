@@ -2,6 +2,10 @@
 ###### Aliases ######
 #####################
 
+if [ -f ~/.bash_local_aliases ]; then
+    . ~/.bash_local_aliases
+fi
+
 alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # fzf with preview

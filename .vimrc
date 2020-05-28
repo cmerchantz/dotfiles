@@ -115,6 +115,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-eunuch'
 Plug 'lervag/vimtex'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+Plug 'junegunn/vim-emoji'
 call plug#end()
 
 "Airline

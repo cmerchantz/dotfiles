@@ -116,6 +116,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'lervag/vimtex'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'junegunn/vim-emoji'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 "Airline
@@ -300,6 +301,11 @@ set conceallevel=1
 
 "tex-conceal.vim
 let g:tex_conceal='abdmg'
+
+"ultisnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 "User-defined commands
 "---------------------

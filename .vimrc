@@ -117,6 +117,7 @@ Plug 'lervag/vimtex'
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'junegunn/vim-emoji'
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 call plug#end()
 
 "Airline
@@ -306,6 +307,12 @@ let g:tex_conceal='abdmg'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+"vim-snippets
+"Use numpy-style docstrings
+let g:ultisnips_python_style = 'numpy'
+"Prefer the use of double quotes, which matches black's preferred quoting style
+let g:ultisnips_python_quoting_style = 'double'
 
 "User-defined commands
 "---------------------

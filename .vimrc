@@ -382,6 +382,7 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 
 "Mappings
 "--------
+nmap Y y$
 imap <Tab> <C-t>
 imap <S-Tab> <C-d>
 nnoremap yo# :ColorToggle<CR>

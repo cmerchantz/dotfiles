@@ -131,6 +131,9 @@ let g:airline#extensions#tabline#show_buffers = 1
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
 
+"fzf
+let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --exclude .git --exclude __pycache__/'
+
 "gitgutter
 hi! link GitGutterAdd DiffAdd
 hi! link GitGutterDelete DiffDelete
@@ -198,6 +201,10 @@ let g:context_enabled = 0
 "gutentags
 let g:gutentags_ctags_tagfile = '.tags'
 let g:gutentags_file_list_command = 'rg --files'
+let g:gutentags_project_root = ['.root']
+let g:gutentags_generate_on_missing=1
+let g:gutentags_generate_on_write=1
+let g:gutentags_background_update=1
 
 "Rainbow Levels
 hi! RainbowLevel0 ctermfg=068 guifg=#6699cc

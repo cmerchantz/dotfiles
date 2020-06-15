@@ -148,6 +148,7 @@ let g:gitgutter_sign_modified = '~'
 let g:gitgutter_sign_removed = '-'
 let g:gitgutter_sign_removed_first_line = '-'
 let g:gitgutter_sign_modified_removed = '~-'
+"leader mapping set below
 
 "fugitive
 autocmd FileType gitcommit set foldmethod=syntax
@@ -406,6 +407,8 @@ let mapleader = ' '
 nnoremap <leader>b :Black<CR>
 nnoremap <leader>c :ContextToggle<CR>
 nnoremap <silent> <leader>f :FZF<CR>
+"Like GitGutterRevertHunk
+nmap <leader>hr <Plug>(GitGutterUndoHunk)
 noremap <leader>rl :RainbowLevelsToggle<cr>
 nnoremap <leader>n :NERDTreeToggleVCS<CR>
 nnoremap <silent> <leader>rg :Rg <C-R><C-W><CR>

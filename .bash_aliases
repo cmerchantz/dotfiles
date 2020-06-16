@@ -6,6 +6,10 @@ if [ -f ~/.bash_local_aliases ]; then
     . ~/.bash_local_aliases
 fi
 
+# Press space after using a substitution like !:2* to see what would be filled
+# in before execution
+bind Space:magic-space
+
 alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # fzf with preview

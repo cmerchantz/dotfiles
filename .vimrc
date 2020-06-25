@@ -42,6 +42,9 @@ au BufNewFile,BufRead *.js, *.html, *.css set tabstop=2 softtabstop=2 shiftwidth
 "RestructuredText autocommands
 au BufNewFile,BufRead *.rst set tabstop=3 softtabstop=3 shiftwidth=3 expandtab autoindent
 
+"LaTeX autocommands
+au BufNewFile,BufRead *.tex set tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab autoindent
+
 "Shell script autocommands
 au BufNewFile,BufRead *.sh set noexpandtab tabstop=4 shiftwidth=4
 

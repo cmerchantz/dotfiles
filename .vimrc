@@ -312,6 +312,7 @@ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 let g:tex_flavor='latex'
 let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
+let g:vimtex_indent_enabled=0
 set conceallevel=1
 
 "tex-conceal.vim

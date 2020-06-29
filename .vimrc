@@ -16,6 +16,9 @@ set updatetime=100
 set nolist
 set scrolloff=1
 
+set showbreak=↪
+set listchars=tab:——❩,nbsp:␣,trail:•,extends:᠁,precedes:᠁
+
 set t_te=""
 au VimLeave * :!clear
 
@@ -46,7 +49,7 @@ au BufNewFile,BufRead *.rst set tabstop=3 softtabstop=3 shiftwidth=3 expandtab a
 au BufNewFile,BufRead *.tex set noexpandtab tabstop=4 shiftwidth=4 noautoindent
 
 "Shell script autocommands
-au BufNewFile,BufRead *.sh set noexpandtab tabstop=4 shiftwidth=4
+au BufNewFile,BufRead *.sh set noexpandtab tabstop=4 shiftwidth=4 list
 
 "Highlighting
 "------------

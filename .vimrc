@@ -3,6 +3,7 @@ set nocompatible
 syntax on
 filetype on
 colorscheme dim
+set notermguicolors
 
 set autoread
 set backspace=indent,eol,start
@@ -66,6 +67,9 @@ hi VertSplit ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi StatusLine ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
 hi SpellCap gui=underline cterm=underline ctermbg=NONE ctermfg=yellow
+hi diffAdded ctermfg=2 guifg=#009900
+hi diffChanged ctermfg=3 guifg=#bbbb00
+hi diffRemoved ctermfg=1 guifg=#ff2222
 hi clear Conceal
 hi clear SignColumn
 
@@ -147,16 +151,13 @@ let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --exclude .git --exclude __pyca
 hi! link GitGutterAdd DiffAdd
 hi! link GitGutterDelete DiffDelete
 hi! link GitGutterChange DiffChange
-hi! link GitGutterChangeDelete DiffChange
-hi diffAdded ctermfg=2 guifg=#009900
-hi diffChanged ctermfg=3 guifg=#bbbb00
-hi diffRemoved ctermfg=1 guifg=#ff2222
+hi GitGutterChangeDelete ctermbg=3 ctermfg=1 guibg=#bbbb00 guifg=#dd0000
 let g:gitgutter_async = 0
-let g:gitgutter_sign_added = '+'
-let g:gitgutter_sign_modified = '~'
-let g:gitgutter_sign_removed = '-'
-let g:gitgutter_sign_removed_first_line = '-'
-let g:gitgutter_sign_modified_removed = '~-'
+let g:gitgutter_sign_added = '\ +'
+let g:gitgutter_sign_modified = '\ ~'
+let g:gitgutter_sign_removed = '\ −'
+let g:gitgutter_sign_removed_first_line = '\ −'
+let g:gitgutter_sign_modified_removed = '\ ~'
 "leader mapping set below
 
 "fugitive
@@ -302,8 +303,10 @@ let g:ale_virtualenv_dir_names = []
 nmap <silent> [a <Plug>(ale_previous_wrap)
 nmap <silent> ]a <Plug>(ale_next_wrap)
 
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
+"let g:ale_sign_error = '✘'
+"let g:ale_sign_warning = '⚠'
+let g:ale_sign_error = '⛔️'
+let g:ale_sign_warning = '⚠️'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 

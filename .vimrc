@@ -16,6 +16,7 @@ set wildmenu
 set updatetime=100
 set nolist
 set scrolloff=1
+set sidescrolloff=1
 
 set showbreak=↪
 set listchars=tab:——❩,nbsp:␣,trail:•,extends:᠁,precedes:᠁

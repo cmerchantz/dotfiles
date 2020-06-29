@@ -51,7 +51,7 @@ au BufNewFile,BufRead *.rst set tabstop=3 softtabstop=3 shiftwidth=3 expandtab a
 au BufNewFile,BufRead *.tex set noexpandtab tabstop=4 shiftwidth=4 noautoindent
 
 "Shell script autocommands
-au BufNewFile,BufRead *.sh set noexpandtab tabstop=4 shiftwidth=4 list
+au BufNewFile,BufRead *.sh set noexpandtab tabstop=4 shiftwidth=4 list | silent! call airline#extensions#whitespace#disable()
 
 "Highlighting
 "------------
@@ -144,6 +144,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
 let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
+let g:airline#extensions#whitespace#enabled = 1
 
 "fzf
 let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --exclude .git --exclude __pycache__/'

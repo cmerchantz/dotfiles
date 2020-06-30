@@ -55,24 +55,31 @@ au BufNewFile,BufRead *.sh set noexpandtab tabstop=4 shiftwidth=4 list | silent!
 
 "Highlighting
 "------------
-hi ColorColumn ctermbg=grey
-hi Search ctermbg=2 ctermfg=0
-hi SearchCurrent ctermbg=2 ctermfg=7
-hi Cursor ctermfg=white
-hi CursorLine ctermbg=darkgrey
-hi CursorColumn ctermbg=darkgrey
-hi Function2 cterm=bold
-hi Folded ctermbg=magenta ctermfg=black
-hi SpellBad gui=underline cterm=underline ctermfg=red ctermbg=darkgrey guifg=red guibg=darkgrey
-hi VertSplit ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
-hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
-hi StatusLine ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
-hi SpellCap gui=underline cterm=underline ctermbg=NONE ctermfg=yellow
-hi diffAdded ctermfg=2 guifg=#009900
-hi diffChanged ctermfg=3 guifg=#bbbb00
-hi diffRemoved ctermfg=1 guifg=#ff2222
-hi clear Conceal
-hi clear SignColumn
+"This is put in a function so that it can be re-applied when leaving Goyo
+function! ApplyHighlighting()
+
+  hi ColorColumn ctermbg=grey
+  hi Search ctermbg=2 ctermfg=0
+  hi SearchCurrent ctermbg=2 ctermfg=7
+  hi Cursor ctermfg=white
+  hi CursorLine ctermbg=darkgrey
+  hi CursorColumn ctermbg=darkgrey
+  hi Function2 cterm=bold
+  hi Folded ctermbg=magenta ctermfg=black
+  hi SpellBad gui=underline cterm=underline ctermfg=red ctermbg=darkgrey guifg=red guibg=darkgrey
+  hi VertSplit ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
+  hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
+  hi StatusLine ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
+  hi SpellCap gui=underline cterm=underline ctermbg=NONE ctermfg=yellow
+  hi diffAdded ctermfg=2 guifg=#009900
+  hi diffChanged ctermfg=3 guifg=#bbbb00
+  hi diffRemoved ctermfg=1 guifg=#ff2222
+  hi clear Conceal
+  hi clear SignColumn
+
+endfunction
+
+call ApplyHighlighting()
 
 "Python highlighting
 "-------------------
@@ -289,7 +296,10 @@ function! s:goyo_leave()
     else
       qa
     endif
+  else
+    call ApplyHighlighting()
   endif
+
 
 endfunction
 

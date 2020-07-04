@@ -40,19 +40,25 @@ set tags=./.tags;~
 "Filetype-specific configuration
 "-------------------------------
 "Python file autocommands
-au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=100 expandtab autoindent fileformat=unix
+au BufNewFile,BufRead *.py
+  \ set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=100 expandtab autoindent fileformat=unix
 
 "Web file autocommands
-au BufNewFile,BufRead *.js, *.html, *.css set tabstop=2 softtabstop=2 shiftwidth=2
+au BufNewFile,BufRead *.js, *.html, *.css
+  \ set tabstop=2 softtabstop=2 shiftwidth=2
 
 "RestructuredText autocommands
-au BufNewFile,BufRead *.rst set tabstop=3 softtabstop=3 shiftwidth=3 expandtab autoindent
+au BufNewFile,BufRead *.rst
+  \ set tabstop=3 softtabstop=3 shiftwidth=3 expandtab autoindent
 
 "LaTeX autocommands
-au BufNewFile,BufRead *.tex set noexpandtab tabstop=4 shiftwidth=4 noautoindent
+au BufNewFile,BufRead *.tex
+  \ set noexpandtab tabstop=4 shiftwidth=4 noautoindent
 
 "Shell script autocommands
-au BufNewFile,BufRead *.sh set noexpandtab tabstop=4 shiftwidth=4 list | silent! call airline#extensions#whitespace#disable()
+au BufNewFile,BufRead *.sh
+  \ set noexpandtab tabstop=4 shiftwidth=4 list
+  \ | silent! call airline#extensions#whitespace#disable()
 
 "Highlighting
 "------------
@@ -93,9 +99,18 @@ let python_highlight_space_errors = 1
 
 "Plugin Management
 "-----------------
+"Done with vim-plug.
 
-"plugins (vim-plug)
+"Bootstrap installation of vim-plug if need be
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+"Specify plugins between the calls to plug#begin and plug#end
 call plug#begin('~/.vim/plugged')
+Plug 'junegunn/vim-plug'
 Plug 'FooSoft/vim-argwrap'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
@@ -424,25 +439,28 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 
 "Mappings
 "--------
-nmap Y y$
-imap <Tab> <C-t>
-imap <S-Tab> <C-d>
+let mapleader = ' '
+
+nnoremap Y y$
+inoremap <Tab> <C-t>
+inoremap <S-Tab> <C-d>
 nnoremap yo# :ColorToggle<CR>
 nnoremap yoa :ALEToggle<CR>
 nnoremap yog :Goyo<CR>
+nnoremap yoz zi
 
-nmap <expr> k (v:count == 0 ? 'gk' : 'k')
-nmap <expr> j (v:count == 0 ? 'gj' : 'j')
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
-"Leader Mappings
-let mapleader = ' '
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
 
 "nnoremap <silent> <leader>a :ALEToggle<CR>
 nnoremap <leader>b :Black<CR>
 nnoremap <leader>c :ContextToggle<CR>
 nnoremap <silent> <leader>f :FZF<CR>
 "Like GitGutterRevertHunk
-nmap <leader>hr <Plug>(GitGutterUndoHunk)
+nnoremap <leader>hr <Plug>(GitGutterUndoHunk)
 noremap <leader>rl :RainbowLevelsToggle<cr>
 nnoremap <leader>n :NERDTreeToggleVCS<CR>
 nnoremap <silent> <leader>rg :Rg <C-R><C-W><CR>

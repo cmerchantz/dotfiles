@@ -9,6 +9,7 @@ set autoread
 set backspace=indent,eol,start
 set smarttab
 set nojoinspaces
+set nofoldenable
 set ruler
 set hlsearch incsearch ignorecase smartcase
 set splitright
@@ -62,10 +63,11 @@ function! ApplyHighlighting()
   hi Search ctermbg=2 ctermfg=0
   hi SearchCurrent ctermbg=2 ctermfg=7
   hi Cursor ctermfg=white
-  hi CursorLine ctermbg=darkgrey
+  hi CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE
+  hi CursorLineNr cterm=NONE  ctermfg=yellow
   hi CursorColumn ctermbg=darkgrey
   hi Function2 cterm=bold
-  hi Folded ctermbg=magenta ctermfg=black
+  hi Folded ctermbg=NONE ctermfg=magenta
   hi SpellBad gui=underline cterm=underline ctermfg=red ctermbg=darkgrey guifg=red guibg=darkgrey
   hi VertSplit ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
   hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
@@ -139,7 +141,16 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'junegunn/vim-emoji'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'DanilaMihailov/beacon.nvim'
+Plug 'junegunn/vim-after-object'
+Plug 'jrudess/vim-foldtext'
 call plug#end()
+
+"vim-after-object
+autocmd VimEnter * call after_object#enable(['a', 'b'], '=', ':', '-', '#', ' ')
+
+"beacon.nvim
+let g:beacon_ignore_filetypes = ['fzf', 'vim-plug']
 
 "Airline
 if $ITERM_PROFILE == 'writing'
@@ -199,9 +210,8 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = '2'
 let g:jedi#goto_stubs_command = ""
 
-"folding
+"SimpylFold
 let g:SimpylFold_docstring_preview = 1
-set nofoldenable
 
 "context.vim
 let g:context_enabled = 0
@@ -299,7 +309,6 @@ function! s:goyo_leave()
   else
     call ApplyHighlighting()
   endif
-
 
 endfunction
 

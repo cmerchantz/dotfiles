@@ -7,6 +7,7 @@ set notermguicolors
 
 set autoread
 set backspace=indent,eol,start
+set hidden
 set smarttab
 set nojoinspaces
 set nofoldenable
@@ -159,6 +160,8 @@ Plug 'honza/vim-snippets'
 Plug 'DanilaMihailov/beacon.nvim'
 Plug 'junegunn/vim-after-object'
 Plug 'jrudess/vim-foldtext'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 call plug#end()
 
 "vim-after-object
@@ -210,6 +213,7 @@ let g:tagbar_sort = 0
 "supertab
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 "black
 let g:black_linelength = 100
@@ -365,6 +369,11 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+
+"vim-racer
+let g:racer_experimental_completer = 1
+let g:racer_insert_paren = 1
+
 "vim-snippets
 "Use numpy-style docstrings
 let g:ultisnips_python_style = 'numpy'
@@ -454,6 +463,8 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
+nnoremap <leader>rf :RustFmt<cr>
 
 "nnoremap <silent> <leader>a :ALEToggle<CR>
 nnoremap <leader>b :Black<CR>

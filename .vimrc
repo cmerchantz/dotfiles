@@ -38,6 +38,8 @@ let $BASH_ENV="~/.vim/vim_bashrc"
 "See also easytags configuration
 set tags=./.tags;~
 
+set tabstop=4 softtabstop=4 shiftwidth=4
+
 "Filetype-specific configuration
 "-------------------------------
 "Python file autocommands
@@ -162,6 +164,7 @@ Plug 'junegunn/vim-after-object'
 Plug 'jrudess/vim-foldtext'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
+Plug 'rhysd/rust-doc.vim'
 call plug#end()
 
 "vim-after-object
@@ -336,19 +339,21 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 "ALE
 let g:ale_enabled = 1
-let g:ale_linters = {'python': ['flake8']}
+let g:ale_linters = {
+	\ 'python': ['flake8'],
+	\ 'rust': ['cargo', 'analyzer'],
+\ }
+let g:ale_fixers = {'rust': ['rustfmt']}
 let g:ale_python_flake8_options = '--max-line-length=100'
 let g:ale_virtualenv_dir_names = []
+let g:ale_sign_error = '⛔️'
+let g:ale_sign_warning = '⚠️'
+
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 nmap <silent> [a <Plug>(ale_previous_wrap)
 nmap <silent> ]a <Plug>(ale_next_wrap)
-
-"let g:ale_sign_error = '✘'
-"let g:ale_sign_warning = '⚠'
-let g:ale_sign_error = '⛔️'
-let g:ale_sign_warning = '⚠️'
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 "vim-latex-live-preview
 "let g:livepreview_previewer = 'evince'

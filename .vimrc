@@ -132,6 +132,7 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'thiagoalessio/rainbow_levels.vim'
 Plug 'junegunn/vim-peekaboo'
 Plug 'lilydjwg/colorizer'
@@ -162,9 +163,9 @@ Plug 'honza/vim-snippets'
 Plug 'DanilaMihailov/beacon.nvim'
 Plug 'junegunn/vim-after-object'
 Plug 'jrudess/vim-foldtext'
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
-Plug 'rhysd/rust-doc.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'rhysd/rust-doc.vim', { 'for': 'rust' }
 call plug#end()
 
 "vim-after-object
@@ -257,6 +258,7 @@ let g:gutentags_project_root = ['.root']
 let g:gutentags_generate_on_missing=1
 let g:gutentags_generate_on_write=1
 let g:gutentags_background_update=1
+let g:gutentags_ctags_executable_rust = '$HOME/.vim/gutentags-rust.sh'
 
 "Rainbow Levels
 hi! RainbowLevel0 ctermfg=068 guifg=#6699cc
@@ -341,7 +343,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 let g:ale_enabled = 1
 let g:ale_linters = {
 	\ 'python': ['flake8'],
-	\ 'rust': ['cargo', 'analyzer'],
+	\ 'rust': ['rls'],
 \ }
 let g:ale_fixers = {'rust': ['rustfmt']}
 let g:ale_python_flake8_options = '--max-line-length=100'
@@ -354,6 +356,9 @@ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
 nmap <silent> [a <Plug>(ale_previous_wrap)
 nmap <silent> ]a <Plug>(ale_next_wrap)
+
+"Use rustup setting for each rust project
+let g:ale_rust_rls_toolchain = ''
 
 "vim-latex-live-preview
 "let g:livepreview_previewer = 'evince'

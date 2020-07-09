@@ -160,7 +160,7 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'junegunn/vim-emoji'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'DanilaMihailov/beacon.nvim'
+"Plug 'DanilaMihailov/beacon.nvim'
 Plug 'junegunn/vim-after-object'
 Plug 'jrudess/vim-foldtext'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }

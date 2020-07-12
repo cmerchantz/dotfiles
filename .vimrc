@@ -1,3 +1,17 @@
+"Ye Olde Vim Configuration
+"-------------------------
+"The contents of this file are:
+"    * Native Vim Settings
+"    * Highlight Groups
+"    * Plugin Installation
+"    * Plugin Settings
+"    * Custom Commands
+"    * Source Mappings (located in .vim/mappings.vim)
+"
+" Filetype-specific settings are set in the .vim/ftplugin directory.
+
+"Native Vim Settings
+"-------------------
 set nocompatible
 
 syntax on
@@ -6,13 +20,17 @@ colorscheme dim
 set notermguicolors
 
 set autoread
+set autowrite
+set relativenumber
 set backspace=indent,eol,start
 set hidden
 set smarttab
 set nojoinspaces
 set nofoldenable
 set ruler
+set number
 set hlsearch incsearch ignorecase smartcase
+set cursorline
 set splitright
 set wildmenu
 set updatetime=100
@@ -20,52 +38,31 @@ set nolist
 set scrolloff=1
 set sidescrolloff=1
 
+"Define appearance of invisible characters
 set showbreak=↪
 set listchars=tab:——❩,nbsp:␣,trail:•,extends:᠁,precedes:᠁
 
+"Clear the terminal on vim leave
 set t_te=""
 au VimLeave * :!clear
 
-if $ITERM_PROFILE == 'writing'
-    set nonumber
-else
-    set number
-endif
-
-"Access a file that sources ~/.bash_aliases
+"Access a file that lets bash aliases be used in vim terminals
 let $BASH_ENV="~/.vim/vim_bashrc"
 
-"See also easytags configuration
+"To find tags, look for a file called .tags and continue looking up the
+"directory tree if we don't find it (until the home directory). This is also
+"relevant to the gutentags configuration (see below).
 set tags=./.tags;~
 
+"By default, let tabs have the width of 4 spaces
 set tabstop=4 softtabstop=4 shiftwidth=4
 
-"Filetype-specific configuration
-"-------------------------------
-"Python file autocommands
-au BufNewFile,BufRead *.py
-  \ set tabstop=4 softtabstop=4 shiftwidth=4 textwidth=100 expandtab autoindent fileformat=unix
+"The filetype-specific configuration exists in .vim/ftplugin files
 
-"Web file autocommands
-au BufNewFile,BufRead *.js, *.html, *.css
-  \ set tabstop=2 softtabstop=2 shiftwidth=2
-
-"RestructuredText autocommands
-au BufNewFile,BufRead *.rst
-  \ set tabstop=3 softtabstop=3 shiftwidth=3 expandtab autoindent
-
-"LaTeX autocommands
-au BufNewFile,BufRead *.tex
-  \ set noexpandtab tabstop=4 shiftwidth=4 noautoindent
-
-"Shell script autocommands
-au BufNewFile,BufRead *.sh
-  \ set noexpandtab tabstop=4 shiftwidth=4 list
-  \ | silent! call airline#extensions#whitespace#disable()
-
-"Highlighting
-"------------
-"This is put in a function so that it can be re-applied when leaving Goyo
+"Highlight Groups
+"----------------
+"The highlighting commands are put in a function so that they can be
+"re-applied when leaving Goyo
 function! ApplyHighlighting()
 
   hi ColorColumn ctermbg=grey
@@ -85,6 +82,12 @@ function! ApplyHighlighting()
   hi diffAdded ctermfg=2 guifg=#009900
   hi diffChanged ctermfg=3 guifg=#bbbb00
   hi diffRemoved ctermfg=1 guifg=#ff2222
+  hi ALEErrorSign ctermbg=NONE ctermfg=red
+  hi ALEWarningSign ctermbg=NONE ctermfg=yellow
+  hi! link GitGutterAdd DiffAdd
+  hi! link GitGutterDelete DiffDelete
+  hi! link GitGutterChange DiffChange
+  hi GitGutterChangeDelete ctermbg=3 ctermfg=1 guibg=#bbbb00 guifg=#dd0000
   hi clear Conceal
   hi clear SignColumn
 
@@ -92,17 +95,9 @@ endfunction
 
 call ApplyHighlighting()
 
-"Python highlighting
+"Plugin Installation
 "-------------------
-let python_highlight_all = 1
-let python_highlight_space_errors = 1
-
-"Highlight 100th column for python files
-"au BufNewFile,BufRead,BufReadPost *.py set colorcolumn=100
-
-"Plugin Management
-"-----------------
-"Done with vim-plug.
+"Plugin management is done by vim-plug.
 
 "Bootstrap installation of vim-plug if need be
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -160,7 +155,6 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'junegunn/vim-emoji'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-"Plug 'DanilaMihailov/beacon.nvim'
 Plug 'junegunn/vim-after-object'
 Plug 'jrudess/vim-foldtext'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -168,13 +162,15 @@ Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rhysd/rust-doc.vim', { 'for': 'rust' }
 call plug#end()
 
-"vim-after-object
+"Plugin Settings
+"---------------
+"The following blocks each relate to the specified plugin. There may also be
+"mappings that relate to plugins in .vim/mappings
+
+"junegunn/vim-after-object
 autocmd VimEnter * call after_object#enable(['a', 'b'], '=', ':', '-', '#', ' ')
 
-"beacon.nvim
-let g:beacon_ignore_filetypes = ['fzf', 'vim-plug']
-
-"Airline
+"vim-airline/vim-airline
 if $ITERM_PROFILE == 'writing'
     let g:airline_theme = 'bubblegum'
 else
@@ -186,72 +182,50 @@ let g:airline_powerline_fonts = 1
 let g:airline_section_y = ''
 let g:airline#extensions#whitespace#enabled = 1
 
-"fzf
+"junegunn/fzf
 let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --exclude .git --exclude __pycache__/'
 
-"gitgutter
-hi! link GitGutterAdd DiffAdd
-hi! link GitGutterDelete DiffDelete
-hi! link GitGutterChange DiffChange
-hi GitGutterChangeDelete ctermbg=3 ctermfg=1 guibg=#bbbb00 guifg=#dd0000
+"airblade/vim-gitgutter
 let g:gitgutter_async = 0
 let g:gitgutter_sign_added = '\ +'
 let g:gitgutter_sign_modified = '\ ~'
 let g:gitgutter_sign_removed = '\ −'
 let g:gitgutter_sign_removed_first_line = '\ −'
 let g:gitgutter_sign_modified_removed = '\ ~'
-"leader mapping set below
 
-"fugitive
+"tpope/vim-fugitive
 autocmd FileType gitcommit set foldmethod=syntax
 
-"vim-minimap
+"severin-lemaignan/vim-minimap
 let g:minimap_highlight = 'SearchCurrent'
 
-"NERDTree
-"leader mapping set below
-
-"tagbar
+"majutsushi/tagbar
 let g:tagbar_sort = 0
 
-"supertab
+"ervandew/supertab
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = '<c-x><c-o>'
 let g:SuperTabClosePreviewOnPopupClose = 1
 
-"black
+"psf/black
 let g:black_linelength = 100
 
-"argrwap
-nnoremap <silent> gw :ArgWrap<CR>
+"FooSoft/vim-argwrap
 let g:argwrap_tail_comma = 1
 
-"jedi-vim
-"let g:jedi#auto_initialization = 0
+"davidhalter/jedi-vim
 let g:jedi#use_splits_not_buffers = 'left'
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = '2'
 let g:jedi#goto_stubs_command = ""
 
-"SimpylFold
+"tmhedberg/SimpylFold
 let g:SimpylFold_docstring_preview = 1
 
-"context.vim
+"wellle/context.vim
 let g:context_enabled = 0
-"leader mapping set below
 
-"easytags
-"let g:easytags_cmd = '/usr/local/bin/ctags'
-"let g:easytags_opts = ['-n']
-"let g:easytags_dynamic_files = 1
-"let g:easytags_file = '~/.tags'
-"let g:easytags_syntax_keyword = 'always'
-"let g:easytags_always_enabled = 1
-"let g:easytags_autorecurse = 0
-"let g:easytags_suppress_report = 1
-"let b:easytags_auto_highlight = 0
-
-"gutentags
+"ludovicchabant/vim-gutentags
 let g:gutentags_ctags_tagfile = '.tags'
 let g:gutentags_file_list_command = 'rg --files'
 let g:gutentags_project_root = ['.root']
@@ -260,33 +234,49 @@ let g:gutentags_generate_on_write=1
 let g:gutentags_background_update=1
 let g:gutentags_ctags_executable_rust = '$HOME/.vim/gutentags-rust.sh'
 
-"Rainbow Levels
-hi! RainbowLevel0 ctermfg=068 guifg=#6699cc
-hi! RainbowLevel1 ctermfg=203 guifg=#ec5f67
-hi! RainbowLevel2 ctermfg=221 guifg=#fac863
-hi! RainbowLevel3 ctermfg=114 guifg=#99c794
-hi! RainbowLevel4 ctermfg=176 guifg=#c594c5
-hi! RainbowLevel5 ctermfg=209 guifg=#f99157
-hi! RainbowLevel6 ctermfg=073 guifg=#62b3b2
-hi! RainbowLevel7 ctermfg=137 guifg=#ab7967
+"thiagoalessio/rainbow_levels.vim
+"Make two functions with different sets of highlighting options that are
+"particular to this plugin
+function! RainbowLevelsColors()
 
-"Preserve syntax highlighting, just color background
-"hi! RainbowLevel0 ctermbg=240 guibg=#585858
-"hi! RainbowLevel1 ctermbg=239 guibg=#4e4e4e
-"hi! RainbowLevel2 ctermbg=238 guibg=#444444
-"hi! RainbowLevel3 ctermbg=237 guibg=#3a3a3a
-"hi! RainbowLevel4 ctermbg=236 guibg=#303030
-"hi! RainbowLevel5 ctermbg=235 guibg=#262626
-"hi! RainbowLevel6 ctermbg=234 guibg=#1c1c1c
-"hi! RainbowLevel7 ctermbg=233 guibg=#121212
+	hi! RainbowLevel0 ctermfg=068 guifg=#6699cc
+	hi! RainbowLevel1 ctermfg=203 guifg=#ec5f67
+	hi! RainbowLevel2 ctermfg=221 guifg=#fac863
+	hi! RainbowLevel3 ctermfg=114 guifg=#99c794
+	hi! RainbowLevel4 ctermfg=176 guifg=#c594c5
+	hi! RainbowLevel5 ctermfg=209 guifg=#f99157
+	hi! RainbowLevel6 ctermfg=073 guifg=#62b3b2
+	hi! RainbowLevel7 ctermfg=137 guifg=#ab7967
 
-"limelight.vim
+endfunction
+
+"This set of highlights preserves syntax highlighting, just color background
+
+function! RainbowLevelsBW()
+
+  hi! RainbowLevel0 ctermbg=240 guibg=#585858
+  hi! RainbowLevel1 ctermbg=239 guibg=#4e4e4e
+  hi! RainbowLevel2 ctermbg=238 guibg=#444444
+  hi! RainbowLevel3 ctermbg=237 guibg=#3a3a3a
+  hi! RainbowLevel4 ctermbg=236 guibg=#303030
+  hi! RainbowLevel5 ctermbg=235 guibg=#262626
+  hi! RainbowLevel6 ctermbg=234 guibg=#1c1c1c
+  hi! RainbowLevel7 ctermbg=233 guibg=#121212
+
+endfunction
+
+"Use the colored foreground one by default
+call RainbowLevelsColors()
+
+"junegunn/limelight.vim
 let g:limelight_conceal_ctermfg = 240
 
-"Goyo
+"junegunn/goyo.vim
 let g:goyo_width = '80%'
 let g:goyo_height = '85%'
 
+"Define two functions that handle entering and exiting Goyo (mostly for
+"Limelight integration)
 function! s:goyo_enter()
 
   if executable('tmux') && strlen($TMUX)
@@ -339,11 +329,16 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-"ALE
+"dense-analysis/ale
 let g:ale_enabled = 1
 let g:ale_linters = {
 	\ 'python': ['flake8'],
-	\ 'rust': ['rls'],
+	\ 'rust': ['rls', 'cargo', 'analyzer'],
+\ }
+let g:ale_rust_rls_config = {
+	\ 'rust': {
+	\	'clippy_preference': 'on'
+	\ }
 \ }
 let g:ale_fixers = {'rust': ['rustfmt']}
 let g:ale_python_flake8_options = '--max-line-length=100'
@@ -351,65 +346,47 @@ let g:ale_virtualenv_dir_names = []
 let g:ale_sign_error = '⛔️'
 let g:ale_sign_warning = '⚠️'
 
-highlight ALEErrorSign ctermbg=NONE ctermfg=red
-highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
-
-nmap <silent> [a <Plug>(ale_previous_wrap)
-nmap <silent> ]a <Plug>(ale_next_wrap)
-
 "Use rustup setting for each rust project
 let g:ale_rust_rls_toolchain = ''
 
-"vim-latex-live-preview
-"let g:livepreview_previewer = 'evince'
-"let g:livepreview_engine = '/Library/TeX/texbin/pdflatex'
-
-"vimtex
+"lervag/vimtex
 let g:tex_flavor='latex'
 let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
 let g:vimtex_indent_enabled=0
 set conceallevel=1
 
-"tex-conceal.vim
+"KeitaNakamura/tex-conceal.vim
 let g:tex_conceal='abdmg'
 
-"ultisnips
+"SirVer/ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-
-"vim-racer
-let g:racer_experimental_completer = 1
-let g:racer_insert_paren = 1
-
-"vim-snippets
+"honza/vim-snippets
 "Use numpy-style docstrings
 let g:ultisnips_python_style = 'numpy'
 "Prefer the use of double quotes, which matches black's preferred quoting style
 let g:ultisnips_python_quoting_style = 'double'
 
-"User-defined commands
-"---------------------
+"racer-rust/vim-racer
+let g:racer_experimental_completer = 1
+let g:racer_insert_paren = 1
 
+"Custom Commands
+"---------------
 " Make a line have 'title case'
 command TitleCase :s/\v<(.)(\w*)/\u\1\L\2/g
 
 "fugitive-esque git diff --staged
 command! Greview :Gtabedit @:% | Gdiff :
 
-"Split a line with S (analagous to J)
-nnoremap S :keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>
-
 "Insert the current date
 command! Date :put =strftime('%A, %d %b %Y')
 
 "Open a new buffer from search matches
 command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | new | setlocal bt=nofile | put! a
-
-"copy to clipboard
-vnoremap <C-c> :w !pbcopy<CR><CR>
 
 "empty all registers
 command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | endfor
@@ -419,10 +396,6 @@ function! s:changebranch(branch)
     execute 'Git checkout' . a:branch
     "call feedkeys("i")
 endfunction
-
-"coverage-highlight.vim
-noremap [C :<C-U>PrevUncovered<CR>
-noremap ]C :<C-U>NextUncovered<CR>
 
 command! -bang Gcheckout call fzf#run({
             \ 'source': 'git branch -a --no-color | grep -v "^\* " ',
@@ -438,58 +411,6 @@ function! CopyMatches(reg)
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
-"jump to next/previous fold
-"nnoremap <silent> <leader>zj :call NextClosedFold('j')<cr>
-"nnoremap <silent> <leader>zk :call NextClosedFold('k')<cr>
-"
-"function! NextClosedFold(dir)
-"    let cmd = 'norm!z' . a:dir
-"    let view = winsaveview()
-"    let [l0, l, open] = [0, view.lnum, 1]
-"    while l != l0 && open
-"        exe cmd
-"        let [l0, l] = [l, line('.')]
-"        let open = foldclosed(l) < 0
-"    endwhile
-"    if open
-"        call winrestview(view)
-"    endif
-"endfunction
-
-"Mappings
-"--------
-let mapleader = ' '
-
-nnoremap Y y$
-inoremap <Tab> <C-t>
-inoremap <S-Tab> <C-d>
-nnoremap yo# :ColorToggle<CR>
-nnoremap yoa :ALEToggle<CR>
-nnoremap yog :Goyo<CR>
-nnoremap yoz zi
-
-nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
-nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
-
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-nnoremap <leader>rf :RustFmt<cr>
-
-"nnoremap <silent> <leader>a :ALEToggle<CR>
-nnoremap <leader>b :Black<CR>
-nnoremap <leader>c :ContextToggle<CR>
-nnoremap <silent> <leader>f :FZF<CR>
-"Like GitGutterRevertHunk
-nnoremap <leader>hr <Plug>(GitGutterUndoHunk)
-noremap <leader>rl :RainbowLevelsToggle<cr>
-nnoremap <leader>n :NERDTreeToggleVCS<CR>
-nnoremap <silent> <leader>rg :Rg <C-R><C-W><CR>
-nnoremap <leader>t :TagbarToggle<CR>
-let g:jedi#rename_command = "<leader>re"
-let g:jedi#usages_command = "<leader>u"
-
-"Check the highlight group under the cursor
-map <leader><leader>h :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+"Source Mappings
+"---------------
+source .vim/mappings.vim

@@ -413,4 +413,4 @@ command! -register CopyMatches call CopyMatches(<q-reg>)
 
 "Source Mappings
 "---------------
-source .vim/mappings.vim
+source ~/.vim/mappings.vim

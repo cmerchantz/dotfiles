@@ -16,8 +16,11 @@ set nocompatible
 
 syntax on
 filetype on
+
+"For colors, match the terminal theme
 colorscheme dim
 set notermguicolors
+set t_Co=16
 
 set autoread
 set autowrite

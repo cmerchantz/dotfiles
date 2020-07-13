@@ -42,7 +42,7 @@ set scrolloff=1
 set sidescrolloff=1
 
 "Define appearance of invisible characters
-set showbreak=↪
+set showbreak=↪\ 
 set listchars=tab:——❩,nbsp:␣,trail:•,extends:᠁,precedes:᠁
 
 "Clear the terminal on vim leave

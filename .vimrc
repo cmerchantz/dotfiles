@@ -71,10 +71,10 @@ function! ApplyHighlighting()
   hi ColorColumn ctermbg=grey
   hi Search ctermbg=2 ctermfg=0
   hi SearchCurrent ctermbg=2 ctermfg=7
-  hi Cursor ctermfg=white
+  hi Cursor ctermbg=white
   hi CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE
   hi CursorLineNr cterm=NONE  ctermfg=yellow
-  hi CursorColumn ctermbg=darkgrey
+  hi CursorColumn ctermbg=white ctermfg=black
   hi Function2 cterm=bold
   hi Folded ctermbg=NONE ctermfg=magenta
   hi SpellBad gui=underline cterm=underline ctermfg=red ctermbg=darkgrey guifg=red guibg=darkgrey
@@ -290,6 +290,7 @@ function! s:goyo_enter()
   set noshowcmd
   set scrolloff=999
 
+	set t_Co=256 "so that Limelight will work
   Limelight
   let g:airline#extensions#tabline#enabled = 0
 
@@ -315,6 +316,8 @@ function! s:goyo_leave()
   let g:airline#extensions#tabline#enabled = 1
   let g:airline#extensions#tabline#show_buffers = 1
   AirlineRefresh
+
+	set t_Co=16 "Back to default after using Limelight
 
   " Quit Vim if this is the only remaining buffer
   if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1

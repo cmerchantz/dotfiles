@@ -68,31 +68,31 @@ set tabstop=4 softtabstop=4 shiftwidth=4
 "re-applied when leaving Goyo
 function! ApplyHighlighting()
 
-  hi ColorColumn ctermbg=grey
-  hi Search ctermbg=2 ctermfg=0
-  hi SearchCurrent ctermbg=2 ctermfg=7
-  hi Cursor ctermbg=white
-  hi CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE
-  hi CursorLineNr cterm=NONE  ctermfg=yellow
-  hi CursorColumn ctermbg=white ctermfg=black
-  hi Function2 cterm=bold
-  hi Folded ctermbg=NONE ctermfg=magenta
-  hi SpellBad gui=underline cterm=underline ctermfg=red ctermbg=darkgrey guifg=red guibg=darkgrey
-  hi VertSplit ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
-  hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
-  hi StatusLine ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
-  hi SpellCap gui=underline cterm=underline ctermbg=NONE ctermfg=yellow
-  hi diffAdded ctermfg=2 guifg=#009900
-  hi diffChanged ctermfg=3 guifg=#bbbb00
-  hi diffRemoved ctermfg=1 guifg=#ff2222
-  hi ALEErrorSign ctermbg=NONE ctermfg=red
-  hi ALEWarningSign ctermbg=NONE ctermfg=yellow
-  hi! link GitGutterAdd DiffAdd
-  hi! link GitGutterDelete DiffDelete
-  hi! link GitGutterChange DiffChange
-  hi GitGutterChangeDelete ctermbg=3 ctermfg=1 guibg=#bbbb00 guifg=#dd0000
-  hi clear Conceal
-  hi clear SignColumn
+	hi ColorColumn ctermbg=grey
+	hi Search ctermbg=2 ctermfg=0
+	hi SearchCurrent ctermbg=2 ctermfg=7
+	hi Cursor ctermbg=white
+	hi CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE
+	hi CursorLineNr cterm=NONE  ctermfg=yellow
+	hi CursorColumn ctermbg=white ctermfg=black
+	hi Function2 cterm=bold
+	hi Folded ctermbg=NONE ctermfg=magenta
+	hi SpellBad gui=underline cterm=underline ctermfg=red ctermbg=darkgrey guifg=red guibg=darkgrey
+	hi VertSplit ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
+	hi StatusLineNC ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
+	hi StatusLine ctermfg=247 ctermbg=233 guifg=#9e9e9e guibg=#121212
+	hi SpellCap gui=underline cterm=underline ctermbg=NONE ctermfg=yellow
+	hi diffAdded ctermfg=2 guifg=#009900
+	hi diffChanged ctermfg=3 guifg=#bbbb00
+	hi diffRemoved ctermfg=1 guifg=#ff2222
+	hi ALEErrorSign ctermbg=NONE ctermfg=red
+	hi ALEWarningSign ctermbg=NONE ctermfg=yellow
+	hi! link GitGutterAdd DiffAdd
+	hi! link GitGutterDelete DiffDelete
+	hi! link GitGutterChange DiffChange
+	hi GitGutterChangeDelete ctermbg=3 ctermfg=1 guibg=#bbbb00 guifg=#dd0000
+	hi clear Conceal
+	hi clear SignColumn
 
 endfunction
 
@@ -104,9 +104,9 @@ call ApplyHighlighting()
 
 "Bootstrap installation of vim-plug if need be
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 "Specify plugins between the calls to plug#begin and plug#end
@@ -175,9 +175,9 @@ autocmd VimEnter * call after_object#enable(['a', 'b'], '=', ':', '-', '#', ' ')
 
 "vim-airline/vim-airline
 if $ITERM_PROFILE == 'writing'
-    let g:airline_theme = 'bubblegum'
+		let g:airline_theme = 'bubblegum'
 else
-    let g:airline_theme = 'powerlineish'
+		let g:airline_theme = 'powerlineish'
 endif
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#show_buffers = 1
@@ -257,14 +257,14 @@ endfunction
 
 function! RainbowLevelsBW()
 
-  hi! RainbowLevel0 ctermbg=240 guibg=#585858
-  hi! RainbowLevel1 ctermbg=239 guibg=#4e4e4e
-  hi! RainbowLevel2 ctermbg=238 guibg=#444444
-  hi! RainbowLevel3 ctermbg=237 guibg=#3a3a3a
-  hi! RainbowLevel4 ctermbg=236 guibg=#303030
-  hi! RainbowLevel5 ctermbg=235 guibg=#262626
-  hi! RainbowLevel6 ctermbg=234 guibg=#1c1c1c
-  hi! RainbowLevel7 ctermbg=233 guibg=#121212
+	hi! RainbowLevel0 ctermbg=240 guibg=#585858
+	hi! RainbowLevel1 ctermbg=239 guibg=#4e4e4e
+	hi! RainbowLevel2 ctermbg=238 guibg=#444444
+	hi! RainbowLevel3 ctermbg=237 guibg=#3a3a3a
+	hi! RainbowLevel4 ctermbg=236 guibg=#303030
+	hi! RainbowLevel5 ctermbg=235 guibg=#262626
+	hi! RainbowLevel6 ctermbg=234 guibg=#1c1c1c
+	hi! RainbowLevel7 ctermbg=233 guibg=#121212
 
 endfunction
 
@@ -282,53 +282,54 @@ let g:goyo_height = '85%'
 "Limelight integration)
 function! s:goyo_enter()
 
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  endif
-  set noshowmode
-  set noshowcmd
-  set scrolloff=999
+	if executable('tmux') && strlen($TMUX)
+		silent !tmux set status off
+		silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+	endif
+	set noshowmode
+	set noshowcmd
+	set scrolloff=999
+	set nocursorline
 
 	set t_Co=256 "so that Limelight will work
-  Limelight
-  let g:airline#extensions#tabline#enabled = 0
+	Limelight
+	let g:airline#extensions#tabline#enabled = 0
 
-  " Allow quitting Vim if this is the only remaining buffer
-  let b:quitting = 0
-  let b:quitting_bang = 0
-  autocmd QuitPre <buffer> let b:quitting = 1
-  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+	" Allow quitting Vim if this is the only remaining buffer
+	let b:quitting = 0
+	let b:quitting_bang = 0
+	autocmd QuitPre <buffer> let b:quitting = 1
+	cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
 
 endfunction
 
 function! s:goyo_leave()
 
-  if executable('tmux') && strlen($TMUX)
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  endif
-  set showmode
-  set showcmd
-  set scrolloff=5
+	if executable('tmux') && strlen($TMUX)
+		silent !tmux set status on
+		silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+	endif
+	set showmode
+	set showcmd
+	set scrolloff=5
 
-  Limelight!
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#show_buffers = 1
-  AirlineRefresh
+	Limelight!
+	let g:airline#extensions#tabline#enabled = 1
+	let g:airline#extensions#tabline#show_buffers = 1
+	AirlineRefresh
 
 	set t_Co=16 "Back to default after using Limelight
 
-  " Quit Vim if this is the only remaining buffer
-  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-    if b:quitting_bang
-      qa!
-    else
-      qa
-    endif
-  else
-    call ApplyHighlighting()
-  endif
+	" Quit Vim if this is the only remaining buffer
+	if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+		if b:quitting_bang
+			qa!
+		else
+			qa
+		endif
+	else
+		call ApplyHighlighting()
+	endif
 
 endfunction
 
@@ -399,21 +400,21 @@ command! WipeReg for i in range(34,122) | silent! call setreg(nr2char(i), []) | 
 
 "Git checkout branch w/autocomplete
 function! s:changebranch(branch)
-    execute 'Git checkout' . a:branch
-    "call feedkeys("i")
+		execute 'Git checkout' . a:branch
+		"call feedkeys("i")
 endfunction
 
 command! -bang Gcheckout call fzf#run({
-            \ 'source': 'git branch -a --no-color | grep -v "^\* " ',
-            \ 'sink': function('s:changebranch')
-            \ })
+	\ 'source': 'git branch -a --no-color | grep -v "^\* " ',
+	\ 'sink': function('s:changebranch')
+	\ })
 
 "copy all search matches (not necessarily entire line)
 function! CopyMatches(reg)
-  let hits = []
-  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
-  let reg = empty(a:reg) ? 'c' : a:reg
-  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+	let hits = []
+	%s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
+	let reg = empty(a:reg) ? 'c' : a:reg
+	execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 

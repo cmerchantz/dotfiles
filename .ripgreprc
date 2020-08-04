@@ -1,0 +1,13 @@
+# Searching
+--type-add=web:*.{html,css,js}*
+--smart-case
+
+# Appearance
+--max-columns=150
+--max-columns-preview
+
+--colors=line:fg:yellow
+--colors=path:fg:cyan
+--colors=path:style:bold
+--colors=match:fg:green
+--colors=match:style:bold

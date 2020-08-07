@@ -15,6 +15,11 @@ inoremap <S-Tab> <C-d>
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
+"Go to the start and end of a paragraph
+"(This doesn't work for the start and end of files)
+nnoremap g{ {j
+nnoremap g} }k
+
 "Split a line with S (analagous to J)
 nnoremap S :keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>
 
@@ -60,6 +65,9 @@ nnoremap <silent> <leader>f :FZF<CR>
 "Define a command that basically mimics <leader>hu, like the bygone
 "GitGutterRevertHunk
 nnoremap <leader>hr <Plug>(GitGutterUndoHunk)
+
+"A mapping for showing a popup window of the commit that introduced the current line
+nmap <silent><leader>gb :call setbufvar(winbufnr(popup_atcursor(split(system("git log -n 1 -L " . line(".") . ",+1:" . expand("%:p")), "\n"), { "padding": [1,1,1,1], "pos": "botleft", "wrap": 0 })), "&filetype", "git")<CR>
 
 "Toggle highlighting that more clearly shows indentation
 noremap <leader>rl :RainbowLevelsToggle<cr>

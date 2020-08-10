@@ -34,3 +34,5 @@
 	        echo; \
 	    done; \
 	}; _"
+[pull]
+	rebase = true

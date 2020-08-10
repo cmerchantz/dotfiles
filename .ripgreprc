@@ -5,8 +5,10 @@
 # Appearance
 --max-columns=150
 --max-columns-preview
+--context-separator=\r\n
 
 --colors=line:fg:yellow
+--colors=column:fg:yellow
 --colors=path:fg:cyan
 --colors=path:style:bold
 --colors=match:fg:green

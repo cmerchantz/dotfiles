@@ -188,6 +188,9 @@ let g:airline#extensions#whitespace#enabled = 1
 "junegunn/fzf
 let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --exclude .git --exclude __pycache__/'
 
+"junegunn/fzf.vim
+let g:fzf_tags_command = 'ctags -R -f .tags'
+
 "airblade/vim-gitgutter
 let g:gitgutter_async = 0
 let g:gitgutter_sign_added = '\ +'

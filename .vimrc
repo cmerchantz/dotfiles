@@ -163,6 +163,7 @@ Plug 'jrudess/vim-foldtext'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rhysd/rust-doc.vim', { 'for': 'rust' }
+Plug 'KenN7/vim-arsync'
 call plug#end()
 
 "Plugin Settings

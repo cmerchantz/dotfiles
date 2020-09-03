@@ -14,6 +14,9 @@
 # vim
 *.session
 
+# vim-arsync
+.vim-arsync
+
 # Packages
 *.7z
 *.dmg

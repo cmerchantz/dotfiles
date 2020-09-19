@@ -19,6 +19,8 @@ nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 "(This doesn't work for the start and end of files)
 nnoremap g{ {j
 nnoremap g} }k
+vnoremap g{ {j
+vnoremap g} }k
 
 "Split a line with S (analagous to J)
 nnoremap S :keeppatterns substitute/\s*\%#\s*/\r/e <bar> normal! ==<CR>

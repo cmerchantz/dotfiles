@@ -41,6 +41,8 @@ set nolist
 set scrolloff=1
 set sidescrolloff=1
 
+set secure exrc
+
 "Define appearance of invisible characters
 set showbreak=↪\ 
 set listchars=tab:——❩,nbsp:␣,trail:•,extends:᠁,precedes:᠁
@@ -422,6 +424,7 @@ function! CopyMatches(reg)
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
 
-"Source Mappings
-"---------------
+"Source other files
+"------------------
+"Key mappings
 source ~/.vim/mappings.vim

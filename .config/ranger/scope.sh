@@ -41,6 +41,13 @@ PYGMENTIZE_STYLE='paraiso-dark'
 
 
 handle_extension() {
+    if [[ "$( tput colors )" -ge 256 ]]; then
+        local pygmentize_format='terminal256'
+        local highlight_format='xterm256'
+    else
+        local pygmentize_format='terminal'
+        local highlight_format='ansi'
+    fi
     case "${FILE_EXTENSION_LOWER}" in
         # Archive
         a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
@@ -85,8 +92,10 @@ handle_extension() {
             ;; # Continue with next handler on failure
         ipynb)
             # Preview as jupytext conversion
-            jupytext "${FILE_PATH}" --to py:light -o - | tail -n +15 && exit 5
-            ;;
+            jupytext "${FILE_PATH}" --to py:light -o - \
+              | tail -n +15 \
+              | pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}" \
+              && exit 5
     esac
 }
 

@@ -398,6 +398,9 @@ command! Greview :Gtabedit @:% | Gdiff :
 "Insert the current date
 command! Date :put =strftime('%A, %d %b %Y')
 
+"Process a jupyter notebook in to python
+command! Jupytext  :tabnew | set filetype=python | r !jupytext --to py:light -o - #
+
 "Open a new buffer from search matches
 command! -nargs=? Filter let @a='' | execute 'g/<args>/y A' | new | setlocal bt=nofile | put! a
 

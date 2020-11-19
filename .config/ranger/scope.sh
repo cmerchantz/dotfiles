@@ -39,8 +39,9 @@ HIGHLIGHT_TABWIDTH=8
 HIGHLIGHT_STYLE='rootwater'
 PYGMENTIZE_STYLE='paraiso-dark'
 
-pygmentize=$CONDA_PREFIX/bin/pygmentize
-jupytext=$CONDA_PREFIX/bin/jupytext
+CONDA_BASE_PREFIX=$(conda info -e | grep base | grep -oE '[^ ]+$')
+pygmentize=$CONDA_BASE_PREFIX/bin/pygmentize
+jupytext=$CONDA_BASE_PREFIX/bin/jupytext
 
 handle_extension() {
     if [[ "$( tput colors )" -ge 256 ]]; then

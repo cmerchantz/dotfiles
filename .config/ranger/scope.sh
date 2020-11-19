@@ -39,6 +39,8 @@ HIGHLIGHT_TABWIDTH=8
 HIGHLIGHT_STYLE='rootwater'
 PYGMENTIZE_STYLE='paraiso-dark'
 
+pygmentize=$CONDA_PREFIX/bin/pygmentize
+jupytext=$CONDA_PREFIX/bin/jupytext
 
 handle_extension() {
     if [[ "$( tput colors )" -ge 256 ]]; then
@@ -92,9 +94,9 @@ handle_extension() {
             ;; # Continue with next handler on failure
         ipynb)
             # Preview as jupytext conversion
-            jupytext "${FILE_PATH}" --to py:light -o - \
+            $jupytext "${FILE_PATH}" --to py:light -o - \
               | tail -n +15 \
-              | pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}" \
+              | $pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}" \
               && exit 5
     esac
 }
@@ -194,7 +196,7 @@ handle_mime() {
             fi
             #highlight --replace-tabs="${HIGHLIGHT_TABWIDTH}" --out-format="${highlight_format}" \
             #    --style="${HIGHLIGHT_STYLE}" --force -- "${FILE_PATH}" && exit 5;;
-            pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}" -- "${FILE_PATH}" && exit 5
+            $pygmentize -f "${pygmentize_format}" -O "style=${PYGMENTIZE_STYLE}" -- "${FILE_PATH}" && exit 5
             exit 2;;
 
         # Image

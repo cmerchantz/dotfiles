@@ -12,7 +12,6 @@ bind Space:magic-space
 
 alias dotfiles='/usr/local/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-alias vimrc='vim ~/.vimrc'
 
 # fzf with preview
 alias fzfp="fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
@@ -155,6 +154,8 @@ alias beep="echo -e '\a'"
 alias bim="vim"
 alias vimr="vim -R"
 alias vimf='vim $(fzfp)'
+alias vimrc='vim ~/.vimrc'
+alias todo="vim -c 'Note To Do'"
 alias resource="source ~/.bash_profile"
 alias ls="ls -1G"
 alias please='sudo $(history -p !!)'

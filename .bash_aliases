@@ -154,6 +154,7 @@ alias beep="echo -e '\a'"
 alias bim="vim"
 alias vimr="vim -R"
 alias vimf='vim $(fzfp)'
+alias vimt='vim -c Tags'
 alias vimrc='vim ~/.vimrc'
 alias todo="vim -c 'Note To Do'"
 alias resource="source ~/.bash_profile"

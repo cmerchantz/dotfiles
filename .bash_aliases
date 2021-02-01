@@ -165,6 +165,7 @@ alias black="black --line-length 100"
 
 # Jupyter
 alias jtdark="jt \
+  -N \
   -T \
   -t onedork \
   -f inconsolata \
@@ -174,6 +175,7 @@ alias jtdark="jt \
   -tf exosans \
 "
 alias jtlight="jt \
+  -N \
   -T \
   -t grade3 \
   -f inconsolata \

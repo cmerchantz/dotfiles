@@ -4,7 +4,7 @@
 
 "Non-leader mappings
 "-------------------
-"Have Y mimic the behavior of C and D
+"Have Y mimic the behavior of C and D, since yy gets the whole line anyway
 nnoremap Y y$
 
 "Tab and shift-tab
@@ -33,6 +33,9 @@ nnoremap yo# :ColorToggle<CR>
 nnoremap yoa :ALEToggle<CR>
 nnoremap yog :Goyo<CR>
 nnoremap yoz zi
+
+"Don't have Q enter Ex mode
+nnoremap Q <Nop>
 
 "Other
 nnoremap <silent> gw :ArgWrap<CR>

@@ -1,0 +1,7 @@
+default_context:
+    full_name: "Christopher Merchantz"
+    email: "42525677+cmerchantz@users.noreply.github.com"
+    github_username: "cmerchantz"
+cookiecutters_dir: ~/.cookiecutters/
+abbreviations:
+    python: https://github.com/cmerchantz/cookiecutter-python-package

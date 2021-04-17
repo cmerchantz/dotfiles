@@ -220,3 +220,11 @@ function ranger-cd {
     rm -f -- "$tempfile"
 }
 
+function chrome() {
+  chrome=/Applications/Chrome.app
+  if [[ -f $1 ]]; then
+    open -a $chrome "$1"
+  else
+    open -a $chrome "https://$1"
+  fi
+}

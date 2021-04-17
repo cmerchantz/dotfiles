@@ -166,6 +166,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 Plug 'rhysd/rust-doc.vim', { 'for': 'rust' }
 Plug 'KenN7/vim-arsync'
+Plug 'tommcdo/vim-exchange'
 call plug#end()
 
 "Plugin Settings
